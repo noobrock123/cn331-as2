@@ -1,0 +1,9 @@
+{% extends 'user_page/layout.html' %}
+{% block body %}
+Login at: {{ time }}
+<ul>
+	<li>
+			<a href="{% url 'q_request:quota_request' %}">Apply quota</a>
+	</li>
+</ul>
+{% endblock %}
