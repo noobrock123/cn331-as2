@@ -1,4 +1,15 @@
 {% extends 'login_page/layout.html' %}
 {% block title %}{% endblock %}
-<h2 lang = 'th'>ขอโควต้า</h2>
-{% block body %}{% endblock %}
+{% block head %}
+<h1>ลงชื่อเข้าใช้การขอโควต้ารายวิชา</h1>
+{% endblock %}
+{% block body %}
+	<form>
+		<label for="fname">รหัสนักศึกษา:</label>
+		<input type="text" id="fname" name="student_id"><br>
+		<label for="password">รหัสผ่าน</label>	
+		
+		<input type="summit" value="summit">
+	</form>
+	<p>รหัสผ่าน</p>
+{% endblock %}
