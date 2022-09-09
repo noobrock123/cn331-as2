@@ -1,10 +1,12 @@
 {% extends 'user_page/layout.html' %}
-{% block body %}
-Login at: {{ time }}
-<ul>
-	<li>
-			<!--This need fixing, somehow...-->
-			<a href="www.google.com">Apply quota</a>
-	</li>
-</ul>
-{% endblock %}
+
+<body bgcolor="pink">
+
+	<h1>สวัสดีคุณ {{name}}</h1>
+	<p>เข้าใช้ครั้งล่าสุด: {{ time }}</p>
+	<ul>
+		<li><a href="http://www.google.com/">ขอโควต้า</a></li>
+		<li><a href="http://www.google.com/">ดูผลการจดโควต้า</a></li>
+		<li><a href="http://www.google.com/">ออกจากระบบ</a></li>
+	</ul>
+</body>
