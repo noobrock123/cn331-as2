@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.urls import path, include
 
 # Create your views here.
 
@@ -21,3 +22,6 @@ def index(request):
 		time_format = str(hour) + ":" + str(minute) + time_format
 	return render(request, 'user_page/user_page.html', {
 	'time': time_format})
+	
+def quota(request):
+	return include('quota_request_page.urls')
