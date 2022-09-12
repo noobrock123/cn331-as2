@@ -18,6 +18,8 @@ def front_page(request):
 	elif hour > 12 and hour <= 23:
 		hour = hour % 12
 		time_format = "PM"
+	else:
+		time_format = "PM"
 	if minute < 10:
 		time_format = str(hour) + ":0" + str(minute) + time_format
 	else:
