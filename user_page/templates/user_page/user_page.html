@@ -5,7 +5,7 @@
 	<h1>สวัสดีคุณ</h1>
 	<p>เข้าใช้ครั้งล่าสุด: {{ time }}</p>
 	<ul>
-		<li><a href="http://www.google.com/">ขอโควต้า</a></li>
+		<li><a href="{% url 'user_page:quota_request_page' %}"">ขอโควต้า</a></li>
 		<li><a href="http://www.google.com/">ดูผลการจดโควต้า</a></li>
 		<li><a href="http://www.google.com/">ออกจากระบบ</a></li>
 	</ul>

@@ -1,7 +1,11 @@
-{% extends 'quota_request_page/layout.html' %}
+{% extends 'user_page/layout.html' %}
 {% block body %}
+    {% for subject in searched_subjects %}
+        <li>{{ subject }}</li>
+    {% endfor %}
     <h2>รายวิชา</h2>
-    <form>
+    <form action="{% url 'user_page:quota_request_page' %}" method='post'>
+        {% csrf_token %}
         <label for="subject_id">รหัสวิชา:</label>
         <input type="text" id="subject_id" name="subject_id"><br>
         <input type="submit" value="ค้นหา">
