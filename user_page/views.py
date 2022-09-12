@@ -4,7 +4,7 @@ from django.urls import path, include
 
 # Create your views here.
 
-def index(request):
+def front_page(request):
 	from django.utils import timezone
 	hour = timezone.localtime().hour
 	minute = timezone.localtime().minute
@@ -23,5 +23,5 @@ def index(request):
 	return render(request, 'user_page/user_page.html', {
 	'time': time_format})
 	
-def quota(request):
-	return include('quota_request_page.urls')
+def quota_page(request):
+	return render(request, 'user_page/quota_request.html')
