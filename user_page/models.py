@@ -9,7 +9,6 @@ class Subject(models.Model):
 	name = models.CharField(max_length=150, null=False)
 	gpd = models.CharField(max_length=3, default="0.0")
 	n_seats = models.IntegerField(default=0)
-	ocu_seats = models.IntegerField(default=0)
 
 	def get_subject(sub_id):
 		if type(sub_id) != str:
