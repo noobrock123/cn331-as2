@@ -1,12 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import path, include
-from .models import Subject, Student
+from .models import Subject
 from django import forms
+from django.contrib.auth import logout
 
 # Create your views here.
 
 def front_page(request):
+	print(request.user.is_authenticated)
+	if not request.user.is_authenticated:
+		return redirect('login_page:login')
 	from django.utils import timezone
 	hour = timezone.localtime().hour
 	minute = timezone.localtime().minute
@@ -24,7 +28,10 @@ def front_page(request):
 		time_format = str(hour) + ":0" + str(minute) + time_format
 	else:
 		time_format = str(hour) + ":" + str(minute) + time_format
+	name = request.user.first_name 
+	print(request.user.username)
 	return render(request, 'user_page/user_page.html', {
+	'name': name,
 	'time': time_format})
 	
 class Search_subjects(forms.Form):
@@ -39,3 +46,9 @@ def quota_page(request):
 		return render(request, 'user_page/request_page.html', 
 		{'searched_subjects': search_result})
 	return render(request, 'user_page/request_page.html')
+
+def log_out(request):
+	logout(request)
+	return redirect('login_page:login')
+
+
