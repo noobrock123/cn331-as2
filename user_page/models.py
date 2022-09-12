@@ -9,7 +9,7 @@ class Subject(models.Model):
 	name = models.CharField(max_length=150, null=False)
 	gpd = models.CharField(max_length=3, default="0.0")
 	n_seats = models.IntegerField(default=0)
-	ocu_seats = models.IntegerField(default=0)
+	student = models.ManyToManyField(User)
 
 	def get_subject(sub_id):
 		if type(sub_id) != str:
@@ -23,12 +23,11 @@ class Subject(models.Model):
 			return subjects
 
 	def __str__(self):
-		return f"{self.subject_id}: {self.name}. GPD: {self.gpd} / Seats= {self.n_seats}/{self.ocu_seats}"
+		return f"{self.subject_id}: {self.name}. GPD: {self.gpd} / Seats= {self.n_seats}"
 
-class Student(models.Model):
-	user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-	student_id = models.IntegerField(primary_key=True)
-	name = models.CharField(max_length=80, null=False)
-	subjects = models.ManyToManyField(Subject, blank=True, related_name="students")
-	def __str(self):
-		return f"{name} {studednt_id}"
+#class Student(models.Model):
+#	student_id = models.IntegerField(primary_key=True)
+#	name = models.CharField(max_length=80, null=False)
+#	subjects = models.ManyToManyField(Subject, blank=True, related_name="students")
+#	def __str(self):
+#		return f"{name} {studednt_id}"
