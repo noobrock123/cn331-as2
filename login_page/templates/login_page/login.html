@@ -4,12 +4,15 @@
 <h1>ลงชื่อเข้าใช้การขอโควต้ารายวิชา</h1>
 {% endblock %}
 {% block body %}
-	<form>
+{% if message %}
+	<div style="color:red">{{ message }}</div>
+{% endif %}
+	<form action="{% url 'login_page:login' %}" method="post">
+		{% csrf_token %}
 		<label for="id">รหัสนักศึกษา:</label>
 		<input type="text" id="id" name="student_id"><br>
-		<label for="passwd">รหัสผ่าน</label>	
-		<input type="text" id="passwd" name="password"><br>
-		<input type="submit" value="sumbit">
+		<label for="passwd">รหัสผ่าน:</label>	
+		<input type="password" id="passwd" name="password"><br>
+		<input type="submit" value="เข้าระบบ">
 	</form>
-	<p>รหัสผ่าน</p>
 {% endblock %}

@@ -1,7 +1,22 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import path, include
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
 def index(request):
+	if request.method == "POST":
+		student_id = request.POST['student_id']
+		password = request.POST['password']
+		user = authenticate(username=student_id, password=password)
+		print(user.is_authenticated)
+		if user is not None:
+			login(request, user)
+			print(user.is_authenticated)
+			return redirect('user_page:front_page')	
+		else:
+			return render(request, 'login_page/login.html',
+			{ 'message': "กรุณาใส่รหัสนักศึกษาและรหัสเข้าระบบให้ถูกต้อง"})
 	return render(request, 'login_page/login.html')
+
