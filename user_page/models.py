@@ -9,7 +9,7 @@ class Subject(models.Model):
 	name = models.CharField(max_length=150, null=False)
 	gpd = models.CharField(max_length=3, default="0.0")
 	n_seats = models.IntegerField(default=0)
-	student = models.ManyToManyField(User)
+	students = models.ManyToManyField(User, related_name="user")
 
 	def get_subject(sub_id):
 		if type(sub_id) != str:
