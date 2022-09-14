@@ -9,7 +9,6 @@ from django.contrib.auth import logout, models
 
 users = models.User
 def front_page(request):
-	print(request.user.is_authenticated)
 	if not request.user.is_authenticated:
 		return redirect('login_page:login')
 	from django.utils import timezone
@@ -29,10 +28,8 @@ def front_page(request):
 		time_format = str(hour) + ":0" + str(minute) + time_format
 	else:
 		time_format = str(hour) + ":" + str(minute) + time_format
-	name = request.user.first_name 
-	#print(request.user.students)
 	return render(request, 'user_page/user_page.html', {
-	'name': name,
+	'name': request.user.first_name,
 	'time': time_format})
 	
 class Search_subjects(forms.Form):
@@ -42,27 +39,38 @@ search_result = []
 def quota_page(request):
 	if 'selected_subjects' not in request.session:
 		request.session['selected_subjects'] = []
+	if 'already_acquired' not in request.session:
+		request.session['already_acquired'] = False
 	n_students = []
 	context = {}
 	if (request.method == 'POST'):
 		sub_id = request.POST['subject_id']	
-		search_result = Subject.get_subject(sub_id)
+		search_result = Subject.get_subject(sub_id, request.user.date_joined.year)
 		if len(search_result) == 0 or len(sub_id) <= 0:
 			return render(request, 'user_page/request_page.html', 
-			{'message': "ไม่ผมวิชาที่ค้นหา",
+			{'not_found_message': "ไม่พบวิชาที่ค้นหา",
 			})
 		return render(request, 'user_page/request_page.html', 
 		{'searched_subjects': search_result,
 		})
-	return render(request, 'user_page/request_page.html', {
-		'selected_subjects': request.session['selected_subjects'],
-	})
+	if request.session['already_acquired']:
+		request.session['already_acquired'] = False
+		return render(request, 'user_page/request_page.html', {
+			'selected_subjects': request.session['selected_subjects'],
+			'already_acquired': "คุณเลือกหรือลงทะเบียนวิชานี้ไปแล้ว" 
+		})
+	else:
+		return render(request, 'user_page/request_page.html', {
+			'selected_subjects': request.session['selected_subjects'],
+		})
 
 def acquire_quota(request, sub_id):
+	subjects = users.objects.get(username=request.user.username).subjects.all()
 	s = Subject.objects.get(pk=sub_id)
-	request.session['selected_subjects'] += [[s.subject_id, s.name, s.gpd]]
-	print(request.session['selected_subjects'])
-	print(type(request.session['selected_subjects']))
+	if s in request.session['selected_subjects'] or s in subjects:
+		request.session['already_acquired'] = True
+		return redirect('./')
+	request.session['selected_subjects'] += [(s.subject_id, s.name, s.gpd)]
 	return redirect('./')
 
 def quota_result(request):

@@ -20,12 +20,12 @@ class Subject(models.Model):
 	is_requestable = models.BooleanField(default=False)
 	students = models.ManyToManyField(User, related_name="subjects", blank=True)
 
-	def get_subject(sub_id):
+	def get_subject(sub_id, user_regis_year):
 		if type(sub_id) != str:
 			print("Error")	
 			return []
 		else:
-			subjects = Subject.objects.filter(subject_id__startswith=sub_id)
+			subjects = Subject.objects.filter(subject_id__startswith=sub_id, year=user_regis_year)
 			if len(subjects) == 0:
 				print("No subject found")	
 			else:

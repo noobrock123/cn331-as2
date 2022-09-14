@@ -3,6 +3,7 @@
     <h2>รายวิชา</h2>
     <li><a href="{% url 'user_page:front_page' %}">ย้อนกลับ</a></li>
     <ul>
+    <div style="color:red">{{ already_acquired }}</div>
     {% for subject in searched_subjects %}
         <li>{{ subject.subject_id }}: {{ subject.name }}<br>
             หน่วยกิต: {{ subject.gpd }} จดทะเบียนแล้ว/ที่นั่ง: {{ subject.students.all|length }}/{{ subject.n_seats }}<br>
@@ -10,14 +11,14 @@
             {% if not subject.is_requestable %}
                 ยังไม่เปิดให้ลงทะเบียน
             {% elif subject.students.all|length == subject.n_seats %}
-                เต็ม
+                <div style="color:red">เต็ม</div>
             {% else %}
                 <a href= {{ subject.subject_id }}>จดทะเบียน</a>
             {% endif %}
             
         </li>
         {% empty %}
-            <div style="color:red">{{ message }}</div>
+            <div style="color:red">{{ not_found_message }}</div>
     {% endfor %}
     </ul>
     <form action="{% url 'user_page:quota_request_page' %}" method='post'>
@@ -27,11 +28,12 @@
         <input type="submit" value="ค้นหา">
     </form>
     <hr>
+    <h2>วิชาที่จะจดทะเบียน</h2>
     <ul>
     {% for subject in selected_subjects %}
-        
-        <li>{{ subject.0 }}<li>
-
+        <li>{{ subject.0 }}: {{ subject.1 }} GPD:{{ subject.2 }}</li>
+        {% empty %}
+        คุณยังไม่ได้เลิอกวิชาใดๆ
     {% endfor %}
     </ul>
 {% endblock %}
