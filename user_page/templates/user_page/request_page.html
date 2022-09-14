@@ -1,9 +1,21 @@
 {% extends 'user_page/layout.html' %}
 {% block body %}
-    {% for subject in searched_subjects %}
-        <li>{{ subject }}</li>
-    {% endfor %}
     <h2>รายวิชา</h2>
+    <li><a href="{% url 'user_page:front_page' %}">ย้อนกลับ</a></li>
+    <ul>
+    {% for subject in searched_subjects %}
+        <li>{{ subject.subject_id }}: {{ subject.name }}<br>
+            หน่วยกิต: {{ subject.gpd }} จดทะเบียนแล้ว/ที่นั่ง: {{ subject.students.all|length }}/{{ subject.n_seats }}<br>
+            สถานะจดทะเบียน: 
+            {% if not subject.is_requestable or subject.students.all|length == subject.n_seats %}
+                เต็ม
+            {% endif %}
+            
+        </li>
+        {% empty %}
+            <div style="color:red">ไม่พบวิชาที่ค้นหา</div>
+    {% endfor %}
+    </ul>
     <form action="{% url 'user_page:quota_request_page' %}" method='post'>
         {% csrf_token %}
         <label for="subject_id">รหัสวิชา:</label>

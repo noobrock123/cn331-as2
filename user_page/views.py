@@ -38,14 +38,25 @@ class Search_subjects(forms.Form):
 	search = forms.CharField(label="ค้นหารายวิชา (รหัสวิชา):", min_length=2)
 
 def quota_page(request):
-	search_result = []
+	n_students = []
 	context = {}
 	if (request.method == 'POST'):
 		sub_id = request.POST['subject_id']	
-		search_result += Subject.get_subject(sub_id)
+		if len(sub_id) <= 1:
+			search_result = []
+		else:
+			search_result = Subject.get_subject(sub_id)
 		return render(request, 'user_page/request_page.html', 
-		{'searched_subjects': search_result})
+		{'searched_subjects': search_result,
+		})
 	return render(request, 'user_page/request_page.html')
+
+def acquire_quota(request, sub_id):
+	print(sub_id)
+	return render(request, 'user_page/request_page.html')
+
+def quota_result(request):
+	return render(request, 'user_page/request_result.html')
 
 def log_out(request):
 	logout(request)
