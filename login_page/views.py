@@ -10,8 +10,6 @@ def index(request):
 		student_id = request.POST['student_id']
 		password = request.POST['password']
 		user = authenticate(username=student_id, password=password)
-		print(user.is_authenticated)
-		print(user.is_superuser)
 		if user is not None:
 			if user.is_superuser:
 				login(request, user)
