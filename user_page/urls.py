@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.front_page, name='front_page'),
     path('quota_request/', views.quota_page, name='quota_request_page'),
     path('quota_request/<str:sub_id>', views.acquire_quota, name='acquire_quota'),
+    path('quota_request/remove/<str:sub_id>', views.remove_quota, name='remove_quota'),
     path('show_quota_result/', views.quota_result, name='show_quota_result'),
 	path('logout', views.log_out, name='log_out')
 ]

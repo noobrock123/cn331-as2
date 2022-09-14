@@ -42,7 +42,6 @@ def quota_page(request):
 	if 'already_acquired' not in request.session:
 		request.session['already_acquired'] = False
 	n_students = []
-	context = {}
 	if (request.method == 'POST'):
 		sub_id = request.POST['subject_id']	
 		search_result = Subject.get_subject(sub_id, request.user.date_joined.year)
@@ -51,7 +50,8 @@ def quota_page(request):
 			{'not_found_message': "ไม่พบวิชาที่ค้นหา",
 			})
 		return render(request, 'user_page/request_page.html', 
-		{'searched_subjects': search_result,
+			{'searched_subjects': search_result,
+			'selected_subjects': request.session['selected_subjects']		
 		})
 	if request.session['already_acquired']:
 		request.session['already_acquired'] = False
@@ -73,11 +73,21 @@ def acquire_quota(request, sub_id):
 	request.session['selected_subjects'] += [(s.subject_id, s.name, s.gpd)]
 	return redirect('./')
 
+def remove_quota(request, sub_id):
+	temp = request.session['selected_subjects']
+	for sub in temp:
+		if sub_id in sub[0]:
+			temp.remove(sub)
+	request.session['selected_subjects'] = temp
+	return redirect('user_page:quota_request_page')	
+
+#In request page
 def quota_result(request):
 	subjects = users.objects.get(username=request.user.username).subjects.all()
 	return render(request, 'user_page/request_result.html', 
 	{'quota_result': subjects})
 
+#In front page
 def log_out(request):
 	if 'selected_subjects' in request.session:
 		request.session['selected_subjects'] = []

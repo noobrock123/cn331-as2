@@ -29,11 +29,19 @@
     </form>
     <hr>
     <h2>วิชาที่จะจดทะเบียน</h2>
-    <ul>
+    <ol>
     {% for subject in selected_subjects %}
-        <li>{{ subject.0 }}: {{ subject.1 }} GPD:{{ subject.2 }}</li>
+        <li>{{ subject.0 }}: {{ subject.1 }} GPD:{{ subject.2 }}
+        <a href = "remove/{{ subject.0 }}">ลบ</a>
+        </li>
         {% empty %}
         คุณยังไม่ได้เลิอกวิชาใดๆ
     {% endfor %}
-    </ul>
+    </ol>
+    {% if selected_subjects %}
+        <li>กรุณาตรวจสอบให้เรียบร้อย เมื่อกดตกลงแล้วจะไม่สามารถแก้ไขได้</li>
+        <form>
+        <input type="submit" value="ตกลง">
+        </form>
+    {% endif %}
 {% endblock %}
