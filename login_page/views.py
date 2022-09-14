@@ -11,7 +11,10 @@ def index(request):
 		password = request.POST['password']
 		user = authenticate(username=student_id, password=password)
 		print(user.is_authenticated)
+		print(user.is_superuser)
 		if user is not None:
+			if user.is_superuser:
+				return redirect('admin/')
 			login(request, user)
 			print(user.is_authenticated)
 			return redirect('user_page:front_page')	
