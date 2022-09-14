@@ -14,6 +14,7 @@ def index(request):
 		print(user.is_superuser)
 		if user is not None:
 			if user.is_superuser:
+				login(request, user)
 				return redirect('admin/')
 			login(request, user)
 			print(user.is_authenticated)
