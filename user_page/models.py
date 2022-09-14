@@ -33,4 +33,4 @@ class Subject(models.Model):
 			return subjects
 
 	def __str__(self):
-		return f"{self.subject_id}: {self.name}, Semester: {self.semester},GPD: {self.gpd}, Seats= {self.n_seats}"
+		return f"{self.subject_id}: {self.name}, Semester: {self.semester},GPD: {self.gpd}, Seats= {self.n_seats}, Year= {self.year}"
