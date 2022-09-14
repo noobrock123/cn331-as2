@@ -30,8 +30,6 @@ def front_page(request):
 	else:
 		time_format = str(hour) + ":" + str(minute) + time_format
 	name = request.user.first_name 
-	print(request.user.username)
-	print(request.user.students.all())
 	#print(request.user.students)
 	return render(request, 'user_page/user_page.html', {
 	'name': name,
@@ -40,30 +38,41 @@ def front_page(request):
 class Search_subjects(forms.Form):
 	search = forms.CharField(label="ค้นหารายวิชา (รหัสวิชา):", min_length=2)
 
+search_result = []
 def quota_page(request):
+	if 'selected_subjects' not in request.session:
+		request.session['selected_subjects'] = []
 	n_students = []
 	context = {}
 	if (request.method == 'POST'):
 		sub_id = request.POST['subject_id']	
-		if len(sub_id) <= 1:
-			search_result = []
-			return render(request, 'user_page/request_page.html',
-			{'message': "ไม่พบวิชาที่ค้นหา"})
-		else:
-			search_result = Subject.get_subject(sub_id)
+		search_result = Subject.get_subject(sub_id)
+		if len(search_result) == 0 or len(sub_id) <= 0:
 			return render(request, 'user_page/request_page.html', 
-			{'searched_subjects': search_result,
+			{'message': "ไม่ผมวิชาที่ค้นหา",
 			})
-	return render(request, 'user_page/request_page.html')
+		return render(request, 'user_page/request_page.html', 
+		{'searched_subjects': search_result,
+		})
+	return render(request, 'user_page/request_page.html', {
+		'selected_subjects': request.session['selected_subjects'],
+	})
 
 def acquire_quota(request, sub_id):
-	print(sub_id)
-	return render(request, 'user_page/request_page.html')
+	s = Subject.objects.get(pk=sub_id)
+	request.session['selected_subjects'] += [[s.subject_id, s.name, s.gpd]]
+	print(request.session['selected_subjects'])
+	print(type(request.session['selected_subjects']))
+	return redirect('./')
 
 def quota_result(request):
-	return render(request, 'user_page/request_result.html')
+	subjects = users.objects.get(username=request.user.username).subjects.all()
+	return render(request, 'user_page/request_result.html', 
+	{'quota_result': subjects})
 
 def log_out(request):
+	if 'selected_subjects' in request.session:
+		request.session['selected_subjects'] = []
 	logout(request)
 	return redirect('login_page:login')
 

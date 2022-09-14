@@ -7,8 +7,12 @@
         <li>{{ subject.subject_id }}: {{ subject.name }}<br>
             หน่วยกิต: {{ subject.gpd }} จดทะเบียนแล้ว/ที่นั่ง: {{ subject.students.all|length }}/{{ subject.n_seats }}<br>
             สถานะจดทะเบียน: 
-            {% if not subject.is_requestable or subject.students.all|length == subject.n_seats %}
+            {% if not subject.is_requestable %}
+                ยังไม่เปิดให้ลงทะเบียน
+            {% elif subject.students.all|length == subject.n_seats %}
                 เต็ม
+            {% else %}
+                <a href= {{ subject.subject_id }}>จดทะเบียน</a>
             {% endif %}
             
         </li>
@@ -19,13 +23,15 @@
     <form action="{% url 'user_page:quota_request_page' %}" method='post'>
         {% csrf_token %}
         <label for="subject_id">รหัสวิชา:</label>
-        <input type="text" id="subject_id" name="subject_id"><br>
+        <input type="text" id="subject_id" name="subject_id">
         <input type="submit" value="ค้นหา">
     </form>
     <hr>
+    <ul>
     {% for subject in selected_subjects %}
         
-        <li>{{ subject }}<li>
+        <li>{{ subject.0 }}<li>
 
     {% endfor %}
+    </ul>
 {% endblock %}

@@ -15,9 +15,10 @@ class Subject(models.Model):
 	name = models.CharField(max_length=150, null=False)
 	gpd = models.CharField(max_length=3, default="0.0")
 	semester = models.IntegerField(choices=semesters_choice, default=1)
+	year = models.IntegerField(choices=year_choice, default=datetime.datetime.now().year)
 	n_seats = models.IntegerField(default=0)
 	is_requestable = models.BooleanField(default=False)
-	students = models.ManyToManyField(User, related_name="user", blank=True)
+	students = models.ManyToManyField(User, related_name="subjects", blank=True)
 
 	def get_subject(sub_id):
 		if type(sub_id) != str:
@@ -33,16 +34,3 @@ class Subject(models.Model):
 
 	def __str__(self):
 		return f"{self.subject_id}: {self.name}, Semester: {self.semester},GPD: {self.gpd}, Seats= {self.n_seats}"
-
-class Year(models.Model):
-	year = models.IntegerField(choices=year_choice, default=datetime.datetime.now().year, primary_key=True)
-	subjects = models.ManyToManyField(Subject, blank=True, related_name="subjects")
-
-	def __str__(self):
-		return f"Year: {self.year}"
-#class Student(models.Model):
-#	student_id = models.IntegerField(primary_key=True)
-#	name = models.CharField(max_length=80, null=False)
-#	subjects = models.ManyToManyField(Subject, blank=True, related_name="students")
-#	def __str(self):
-#		return f"{name} {studednt_id}"

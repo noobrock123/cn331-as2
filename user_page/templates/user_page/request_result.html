@@ -3,7 +3,7 @@
     <li><a href="{% url 'user_page:front_page' %}">ย้อนกลับ</a></li>
     <ul>
         {% for sub in quota_result%}
-            <li>{{ sub }}</li>
+            <li>{{ sub.subject_id }}: {{ sub.name }} หน่วยกิต: {{ sub.gpd }}</li>
             {% empty %}
             <li>คุณยังไม่ได้จดทะเบียนวิชาใดๆ</li>
         {% endfor %}
