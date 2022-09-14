@@ -13,7 +13,7 @@
             
         </li>
         {% empty %}
-            <div style="color:red">ไม่พบวิชาที่ค้นหา</div>
+            <div style="color:red">{{ message }}</div>
     {% endfor %}
     </ul>
     <form action="{% url 'user_page:quota_request_page' %}" method='post'>

@@ -3,10 +3,11 @@ from django.http import HttpResponse
 from django.urls import path, include
 from .models import Subject
 from django import forms
-from django.contrib.auth import logout
+from django.contrib.auth import logout, models
 
 # Create your views here.
 
+users = models.User
 def front_page(request):
 	print(request.user.is_authenticated)
 	if not request.user.is_authenticated:
@@ -30,6 +31,8 @@ def front_page(request):
 		time_format = str(hour) + ":" + str(minute) + time_format
 	name = request.user.first_name 
 	print(request.user.username)
+	print(request.user.students.all())
+	#print(request.user.students)
 	return render(request, 'user_page/user_page.html', {
 	'name': name,
 	'time': time_format})
@@ -44,11 +47,13 @@ def quota_page(request):
 		sub_id = request.POST['subject_id']	
 		if len(sub_id) <= 1:
 			search_result = []
+			return render(request, 'user_page/request_page.html',
+			{'message': "ไม่พบวิชาที่ค้นหา"})
 		else:
 			search_result = Subject.get_subject(sub_id)
-		return render(request, 'user_page/request_page.html', 
-		{'searched_subjects': search_result,
-		})
+			return render(request, 'user_page/request_page.html', 
+			{'searched_subjects': search_result,
+			})
 	return render(request, 'user_page/request_page.html')
 
 def acquire_quota(request, sub_id):
