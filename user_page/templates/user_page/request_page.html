@@ -13,7 +13,7 @@
             {% elif subject.students.all|length == subject.n_seats %}
                 <div style="color:red">เต็ม</div>
             {% else %}
-                <a href= {{ subject.subject_id }}>จดทะเบียน</a>
+                <a href= "get/{{ subject.subject_id }}">จดทะเบียน</a>
             {% endif %}
             
         </li>
@@ -40,8 +40,9 @@
     </ol>
     {% if selected_subjects %}
         <li>กรุณาตรวจสอบให้เรียบร้อย เมื่อกดตกลงแล้วจะไม่สามารถแก้ไขได้</li>
-        <form>
-        <input type="submit" value="ตกลง">
+        <form action="{% url 'user_page:accept_quota'%}" method='post'>
+            {% csrf_token %}
+            <input type="submit" value="ตกลง">
         </form>
     {% endif %}
 {% endblock %}

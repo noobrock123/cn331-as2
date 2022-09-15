@@ -32,11 +32,10 @@ def front_page(request):
 	'name': request.user.first_name,
 	'time': time_format})
 	
-class Search_subjects(forms.Form):
-	search = forms.CharField(label="ค้นหารายวิชา (รหัสวิชา):", min_length=2)
-
+#========== Below this line, results from codes will be showned in request_page.html ==========
 search_result = []
 def quota_page(request):
+	#Initialize sessions
 	if 'selected_subjects' not in request.session:
 		request.session['selected_subjects'] = []
 	if 'already_acquired' not in request.session:
@@ -68,10 +67,10 @@ def acquire_quota(request, sub_id):
 	subjects = users.objects.get(username=request.user.username).subjects.all()
 	s = Subject.objects.get(pk=sub_id)
 	if s in request.session['selected_subjects'] or s in subjects:
-		request.session['already_acquired'] = True
-		return redirect('./')
+		request.session['already_acquired']= True
+		return redirect('user_page:quota_request_page')
 	request.session['selected_subjects'] += [(s.subject_id, s.name, s.gpd)]
-	return redirect('./')
+	return redirect('user_page:quota_request_page')
 
 def remove_quota(request, sub_id):
 	temp = request.session['selected_subjects']
@@ -81,11 +80,27 @@ def remove_quota(request, sub_id):
 	request.session['selected_subjects'] = temp
 	return redirect('user_page:quota_request_page')	
 
-#In request page
+def accept_quota(request):
+	if request.method == 'POST':
+		user = users.objects.get(username=request.user.username)
+		for sub in request.session['selected_subjects']:
+			(Subject.objects.get(pk=sub[0])).students.add(user)
+		request.session['selected_subjects'] = []
+		return redirect('user_page:show_quota_result')
+#========== Above this line, results from codes will be showned in request_page.html ==========
+
+
+#========== Below this line, user can check total gpd in semester and year ==========
 def quota_result(request):
 	subjects = users.objects.get(username=request.user.username).subjects.all()
+	sum_gpd = 0
+	for sub in subjects:
+		sum_gpd += float(sub.gpd)
 	return render(request, 'user_page/request_result.html', 
-	{'quota_result': subjects})
+		{'quota_result': subjects,
+		'sum_gpd': sum_gpd	
+		})
+#========== Below this line, user can check total gpd in semester and year ==========
 
 #In front page
 def log_out(request):
