@@ -5,7 +5,7 @@
     <ul>
         {% for sub in quota_result%}
             <li>{{ sub.subject_id }}: {{ sub.name }} หน่วยกิต: {{ sub.gpd }}  
-                <a href= "{% url 'user_page:remove_acquired_quota' sub.subject_id %}">ลบ</a>
+                <a href= "{% url 'user_page:remove_acquired_quota' sub.subject_id %}">ถอน</a>
             </li>
             {% empty %}
             <li>คุณยังไม่ได้จดทะเบียนวิชาใดๆ</li>

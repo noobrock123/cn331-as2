@@ -94,11 +94,13 @@ def accept_quota(request):
 def quota_result(request):
 	subjects = users.objects.get(username=request.user.username).subjects.all()
 	sum_gpd = 0
+	print(years)
 	for sub in subjects:
 		sum_gpd += float(sub.gpd)
 	return render(request, 'user_page/request_result.html', 
 		{'quota_result': subjects,
-		'sum_gpd': sum_gpd	
+		'sum_gpd': sum_gpd,
+		'years': years,
 		})
 
 def remove_acquired_quota(request, sub_id):
