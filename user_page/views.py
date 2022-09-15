@@ -90,7 +90,7 @@ def accept_quota(request):
 #========== Above this line, results from codes will be showned in request_page.html ==========
 
 
-#========== Below this line, user can check total gpd in semester and year and remove quota ==========
+#========== Below this line, user can check total gpd and remove quota ==========
 def quota_result(request):
 	subjects = users.objects.get(username=request.user.username).subjects.all()
 	sum_gpd = 0
@@ -108,7 +108,7 @@ def remove_acquired_quota(request, sub_id):
 	subject_to_remove = Subject.objects.get(pk=sub_id)
 	user.subjects.remove(subject_to_remove)
 	return redirect('user_page:show_quota_result')
-#========== Above this line, user can check total gpd in semester and year and remove quota ==========
+#========== Above this line, user can check total gpd and remove quota ==========
 
 #In front page
 def log_out(request):
