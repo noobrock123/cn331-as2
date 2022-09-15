@@ -39,10 +39,10 @@
     {% endfor %}
     </ol>
     {% if selected_subjects %}
-        <li>กรุณาตรวจสอบให้เรียบร้อย เมื่อกดตกลงแล้วจะไม่สามารถแก้ไขได้</li>
+        ***โปรดตรวจสอบให้เรียบร้อยก่อนกดยืนยัน คุณยังสามารถถอนวิชาในหน้าดูผลการจดโควต้าได้***
         <form action="{% url 'user_page:accept_quota'%}" method='post'>
             {% csrf_token %}
-            <input type="submit" value="ตกลง">
+            <input type="submit" value="ยืนยัน">
         </form>
     {% endif %}
 {% endblock %}
