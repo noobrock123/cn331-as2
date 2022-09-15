@@ -100,7 +100,13 @@ def quota_result(request):
 		{'quota_result': subjects,
 		'sum_gpd': sum_gpd	
 		})
-#========== Below this line, user can check total gpd in semester and year ==========
+
+def remove_acquired_quota(request, sub_id):
+	user = users.objects.get(username=request.user.username)
+	subject_to_remove = Subject.objects.get(pk=sub_id)
+	user.subjects.remove(subject_to_remove)
+	return redirect('user_page:show_quota_result')
+#========== Above this line, user can check total gpd in semester and year ==========
 
 #In front page
 def log_out(request):
