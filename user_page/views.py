@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.urls import path, include
 from .models import Subject
 from django import forms
 from django.contrib.auth import logout, models
@@ -44,7 +42,7 @@ def quota_page(request):
 	if (request.method == 'POST'):
 		sub_id = request.POST['subject_id']	
 		search_result = Subject.get_subject(sub_id, request.user.date_joined.year)
-		if len(search_result) == 0 or len(sub_id) <= 0:
+		if len(search_result) == 0 or len(sub_id) < 2:
 			return render(request, 'user_page/request_page.html', 
 			{'not_found_message': "ไม่พบวิชาที่ค้นหา",
 			})
@@ -90,17 +88,15 @@ def accept_quota(request):
 #========== Above this line, results from codes will be showned in request_page.html ==========
 
 
-#========== Below this line, user can check total gpd and remove quota ==========
+#========== Below this line, user can check total gpd and remove quota in request_result.html==========
 def quota_result(request):
 	subjects = users.objects.get(username=request.user.username).subjects.all()
 	sum_gpd = 0
-	print(years)
 	for sub in subjects:
 		sum_gpd += float(sub.gpd)
 	return render(request, 'user_page/request_result.html', 
 		{'quota_result': subjects,
 		'sum_gpd': sum_gpd,
-		'years': years,
 		})
 
 def remove_acquired_quota(request, sub_id):
@@ -108,7 +104,7 @@ def remove_acquired_quota(request, sub_id):
 	subject_to_remove = Subject.objects.get(pk=sub_id)
 	user.subjects.remove(subject_to_remove)
 	return redirect('user_page:show_quota_result')
-#========== Above this line, user can check total gpd and remove quota ==========
+#========== Above this line, user can check total gpd and remove quota in request_result.html==========
 
 #In front page
 def log_out(request):

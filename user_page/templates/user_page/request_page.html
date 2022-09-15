@@ -11,7 +11,7 @@
             {% if not subject.is_requestable %}
                 ยังไม่เปิดให้ลงทะเบียน
             {% elif subject.students.all|length == subject.n_seats %}
-                <div style="color:red">เต็ม</div>
+                <p style="color:red">เต็ม</p>
             {% else %}
                 <a href= "get/{{ subject.subject_id }}">จดทะเบียน</a>
             {% endif %}
