@@ -8,7 +8,7 @@
 .background_user{
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(user_page/images/bg.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(images/bg.jpg);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -76,14 +76,10 @@ nav .logo_user{
     font-size: 20px;
 }
 .hello h1{
-    position: absolute;
-    display: flex;
-    align-items: center;
     font-size: 45px;
     color: #fff;
     font-weight: 22px;
     margin-bottom: 100px;
-    right: 40%;
 }
 
 .slide-left{
@@ -109,84 +105,10 @@ nav .logo_user{
     color: #fff;
 }
 
-.background_login{
-    width: 50%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(user_page/images/bgu.jpg);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1%;
-}
-
-.content_login{
-    margin-top: 10%;
-    font-size: 20px;
-}
-
-.content_login h1{
-    position: relative;
-    color: #fff;
-    font-weight: 70px;
-    left: 5%;
-}
-
-.myid{
-    margin-top: 5%;
-    font-size: 10px;
-    position: absolute;
-    display: flex;
-    color: #fff;
-    bottom: 45%;
-    right: 50%;
-}
-
-
-
-.input-box{
-    position:static;
-    margin-top: 2%;
-    display: flex;
-}
-
-.input-box input{
-    width: 40%;
-    height: 35px;
-    margin-left: 10%;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    outline: none;
-    color: #fff;
-    background: transparent;
-}
-
-button{
-    background: transparent;
-    border: 0;
-    outline: none;
-    border-radius: 50%;
-    cursor: pointer;
-    position:static;
-    top: 50%;
-    right: 15px;
-}
-
-button img{
-    width: 34px;
-    margin-left: 30%;
-}
-
-
-.red{
-    color: red;
-    margin-left: 10%;
-}
-
 .background_page {
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(68, 67, 67, 0.479), rgba(58, 58, 58, 0.452)),url(user_page/images/bg.jpg);
+    background-image: linear-gradient(rgba(68, 67, 67, 0.479), rgba(58, 58, 58, 0.452)),url(images/bg.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -197,7 +119,7 @@ button img{
 .listpage{
     font-size: 35px;
     position: static;
-    margin-left: 15%;
+    margin-left: 10%;
 }
 
 .sidebar{
@@ -221,19 +143,17 @@ button img{
 }
 
 .subjectlist{
-    margin-left: 15%;
+    margin-left: 10%;
 }
 
 .subjectlist2{
-    margin-left: 15%;
-    margin-top: 5%;
+    margin-left: 10%;
     padding: 22px 7px;
 }
 
 
 .text-boxpage{
     margin-left: 10%;
-    margin-top: 10%;
 }
 
 .text-boxpage a{
@@ -280,13 +200,13 @@ button img{
 .background_result {
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(68, 67, 67, 0.479), rgba(58, 58, 58, 0.452)),url(user_page/images/bg.jpg);
+    background-image: linear-gradient(rgba(68, 67, 67, 0.479), rgba(58, 58, 58, 0.452)),url(images/bg.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     align-items: center;
     justify-content: center;
-    margin-left: 15%;
+    margin-left: 10%;
     position: static;
 }
 

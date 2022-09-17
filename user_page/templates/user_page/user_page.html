@@ -13,12 +13,13 @@
 	</nav>
 	<div class="content_user">
 		<h1 class="slide-left">THAMMASAT UNIVERSITY</h1><br>
+		{% csrf_token %}
+		<div class="hello">
+			<h1 class="slide-left">สวัสดีคุณ{{ name }}</h1>
+		</div>
 	</div>
 
-	{% csrf_token %}
-	<div class="hello">
-		<h1 class="slide-left">สวัสดี{{ name }}</h1>
-	</div>
+	
 	<p class="time_user">เข้าใช้ครั้งล่าสุด: {{ time }}</p>
 	
 </div>

@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 50px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 17px;
+    border: 2px solid #fff;
+    padding: 10px 24px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover{
+    -webkit-text-stroke: 2px rgb(255, 255, 255);
+    color: transparent;
+}
+
+nav .logo_user{
+    height: 100px;
+}
+
+.background_login{
+    width: 50%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(images/bgu.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1%;
+}
+
+.content_login{
+    margin-top: 10%;
+    font-size: 20px;
+}
+
+.content_login h1{
+    position: relative;
+    color: #fff;
+    font-weight: 70px;
+    left: 5%;
+}
+
+.myid{
+    margin-top: 5%;
+    font-size: 10px;
+    position: absolute;
+    display: flex;
+    color: #fff;
+    bottom: 45%;
+    right: 50%;
+}
+
+
+
+.input-box{
+    position:static;
+    margin-top: 2%;
+    display: flex;
+}
+
+.input-box input{
+    width: 40%;
+    height: 35px;
+    margin-left: 10%;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    color: #fff;
+    background: transparent;
+}
+
+button{
+    background: transparent;
+    border: 0;
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position:static;
+    top: 50%;
+    right: 15px;
+}
+
+button img{
+    width: 34px;
+    margin-left: 30%;
+}
+
+
+.red{
+    color: red;
+    margin-left: 10%;
+}
