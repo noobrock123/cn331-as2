@@ -15,7 +15,6 @@ def index(request):
 				login(request, user)
 				return redirect('admin/')
 			login(request, user)
-			print(user.is_authenticated)
 			return redirect('user_page:front_page')	
 		else:
 			return render(request, 'login_page/login.html',
