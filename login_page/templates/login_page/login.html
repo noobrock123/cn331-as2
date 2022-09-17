@@ -1,18 +1,32 @@
 {% extends 'login_page/layout.html' %}
 {% block title %}{% endblock %}
 {% block head %}
-<h1>ลงชื่อเข้าใช้การขอโควต้ารายวิชา</h1>
 {% endblock %}
+{%load static%}
 {% block body %}
-{% if message %}
-	<div style="color:red">{{ message }}</div>
-{% endif %}
-	<form action="{% url 'login_page:login' %}" method="post">
-		{% csrf_token %}
-		<label for="id">รหัสนักศึกษา:</label>
-		<input type="text" id="id" name="student_id"><br>
-		<label for="passwd">รหัสผ่าน:</label>	
-		<input type="password" id="passwd" name="password"><br>
-		<input type="submit" value="เข้าระบบ">
-	</form>
+<body class="background_login">
+	<img src="{% static 'user_page/images/logo1.png' %}" class="logo_login">
+	<div class="content_login">
+		<h1>ลงชื่อเข้าใช้การขอโควต้ารายวิชา</h1>
+	</div>
+		<form action="{% url 'login_page:login' %}" method="post">
+			{% csrf_token %}
+			
+					<h1 class="myid"><label for="id"></label></h1>
+					<div class="input-box">
+						<input type="text" id="id" name="student_id" placeholder="รหัสนักศึกษา"><br>
+					</div>
+
+
+					<h1><label for="passwd" class="myid"></label></h1>
+					<div class="input-box">
+						<input type="password" id="passwd" name="password" placeholder="รหัสผ่าน"><br>
+						<button type="submit"><img src="{% static 'user_page/images/button.png' %}"></button>
+					</div>
+		</form>
+	{% if message %}
+		<div class="red">{{ message }}</div>
+	{% endif %}
+</body>
 {% endblock %}
+

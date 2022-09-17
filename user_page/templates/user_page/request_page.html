@@ -1,48 +1,100 @@
 {% extends 'user_page/layout.html' %}
+{%load static%}
 {% block body %}
-    <h2>รายวิชา</h2>
-    <li><a href="{% url 'user_page:front_page' %}">ย้อนกลับ</a></li>
-    <ul>
-    <div style="color:red">{{ already_acquired }}</div>
-    {% for subject in searched_subjects %}
-        <li>{{ subject.subject_id }}: {{ subject.name }}<br>
-            หน่วยกิต: {{ subject.gpd }} จดทะเบียนแล้ว/ที่นั่ง: {{ subject.students.all|length }}/{{ subject.n_seats }}<br>
-            สถานะจดทะเบียน: 
-            {% if not subject.is_requestable %}
-                ยังไม่เปิดให้ลงทะเบียน
-            {% elif subject.students.all|length == subject.n_seats %}
-                <p style="color:red">เต็ม</p>
-            {% else %}
-                <a href= "get/{{ subject.subject_id }}">จดทะเบียน</a>
-            {% endif %}
+
+<body class="background_page">
+    <h2 class="listpage">ค้นหารายวิชา</h2>
+    <form action="{% url 'user_page:quota_request_page' %}" method='post'>
+        {% csrf_token %}
+    <div class="subjectlist">
+            <label for="subject_id">รหัสวิชา:</label>
+            <input type="text" id="subject_id" name="subject_id">
+            <input type="submit" value="ค้นหา">
+    </div>
+    </form>
+    <div class="subjectlist2">
+        <div style="color:red">{{ already_acquired }}</div>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>รหัสวิชา</th>
+                    <th>ชื่อวิชา</th>
+                    <th>หน่วยกิต</th>
+                    <th>จดทะเบียนแล้ว/ที่นั่ง</th>
+                    <th>สถานะจดทะเบียน</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for subject in searched_subjects %}
+            <tr class="active-row">
+                <td>{{ subject.subject_id }}</td>
             
-        </li>
+                <td>{{ subject.name }}</td>
+
+                <td>{{ subject.gpd }}</td>
+            
+                <td>{{ subject.students.all|length }}/{{ subject.n_seats }}</td>
+            
+                <td>
+                    {% if not subject.is_requestable %}
+                        ยังไม่เปิดให้ลงทะเบียน
+                    {% elif subject.students.all|length == subject.n_seats %}
+                        <p style="color:red">เต็ม</p>
+                    {% else %}
+                        <a href= "get/{{ subject.subject_id }}">จดทะเบียน</a>
+                    {% endif %}
+                </td>
+            
+        </tr>
         {% empty %}
             <div style="color:red">{{ not_found_message }}</div>
     {% endfor %}
-    </ul>
-    <form action="{% url 'user_page:quota_request_page' %}" method='post'>
-        {% csrf_token %}
-        <label for="subject_id">รหัสวิชา:</label>
-        <input type="text" id="subject_id" name="subject_id">
-        <input type="submit" value="ค้นหา">
-    </form>
-    <hr>
+        </tbody>
+    </table>
     <h2>วิชาที่จะจดทะเบียน</h2>
     <ol>
-    {% for subject in selected_subjects %}
-        <li>{{ subject.0 }}: {{ subject.1 }} GPD:{{ subject.2 }}
-        <a href = "remove/{{ subject.0 }}">ลบ</a>
-        </li>
-        {% empty %}
-        คุณยังไม่ได้เลิอกวิชาใดๆ
-    {% endfor %}
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อวิชา</th>
+                <th>หน่วยกิต</th>
+                <th>ยกเลิก</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for subject in selected_subjects %}
+            <tr class="active-row">
+                <td>{{ subject.0 }}</td>
+
+                <td>{{ subject.1 }}</td>
+
+                <td>{{ subject.2 }}</td>
+
+                <td><a href = "remove/{{ subject.0 }}">ลบ</a></td>
+            </tr>
+            {% empty %}
+            คุณยังไม่ได้เลิอกวิชาใดๆ
+        {% endfor %}
     </ol>
+        </tbody>
+    </table>
     {% if selected_subjects %}
-        ***โปรดตรวจสอบให้เรียบร้อยก่อนกดยืนยัน คุณยังสามารถถอนวิชาในหน้าดูผลการจดโควต้าได้***
+        <div style="color: #fff;">
+            ***โปรดตรวจสอบให้เรียบร้อยก่อนกดยืนยัน คุณยังสามารถถอนวิชาในหน้าดูผลการจดโควต้าได้***
+        </div>
         <form action="{% url 'user_page:accept_quota'%}" method='post'>
             {% csrf_token %}
             <input type="submit" value="ยืนยัน">
         </form>
     {% endif %}
+    </div>
+    </tr>
+    </div>
+    <div class="sidebar">
+        <div class="text-boxpage">
+            <a href="{% url 'user_page:front_page' %}" class="backpage"><img src="{% static 'user_page/images/backpage.png' %}">ย้อนกลับ</a>
+        </div>
+    </div>
+</body>
 {% endblock %}

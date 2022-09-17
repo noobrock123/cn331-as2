@@ -1,0 +1,325 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.background_user{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(user_page/images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
+}
+
+nav{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 50px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 17px;
+    border: 2px solid #fff;
+    padding: 10px 24px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover{
+    -webkit-text-stroke: 2px rgb(255, 255, 255);
+    color: transparent;
+}
+
+nav .logo_user{
+    height: 100px;
+}
+
+.content_user{
+    text-align: center;
+}
+
+.content_user h1{
+    position: relative;
+    font-size: 60px;
+    color: #fff;
+    font-weight: 100px;
+    transition: 0.5s;
+}
+
+.content_user h1:hover{
+    -webkit-text-stroke: 2px #fff;
+    color: transparent;
+}
+
+.hello{
+    margin-top: 5%;
+    font-size: 20px;
+}
+.hello h1{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    font-size: 45px;
+    color: #fff;
+    font-weight: 22px;
+    margin-bottom: 100px;
+    right: 40%;
+}
+
+.slide-left{
+    animation: slideleft 1s linear forwards;
+}
+@keyframes slideleft{
+    0%{
+        transform: translate(50px);
+        opacity: 0;
+    }
+    100%{
+        transform: translate(0px);
+        opacity: 1;
+    }
+}
+
+.time_user{
+    position: absolute;
+    right: 7%;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.background_login{
+    width: 50%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url(user_page/images/bgu.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1%;
+}
+
+.content_login{
+    margin-top: 10%;
+    font-size: 20px;
+}
+
+.content_login h1{
+    position: relative;
+    color: #fff;
+    font-weight: 70px;
+    left: 5%;
+}
+
+.myid{
+    margin-top: 5%;
+    font-size: 10px;
+    position: absolute;
+    display: flex;
+    color: #fff;
+    bottom: 45%;
+    right: 50%;
+}
+
+
+
+.input-box{
+    position:static;
+    margin-top: 2%;
+    display: flex;
+}
+
+.input-box input{
+    width: 40%;
+    height: 35px;
+    margin-left: 10%;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    color: #fff;
+    background: transparent;
+}
+
+button{
+    background: transparent;
+    border: 0;
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position:static;
+    top: 50%;
+    right: 15px;
+}
+
+button img{
+    width: 34px;
+    margin-left: 30%;
+}
+
+
+.red{
+    color: red;
+    margin-left: 10%;
+}
+
+.background_page {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(68, 67, 67, 0.479), rgba(58, 58, 58, 0.452)),url(user_page/images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
+}
+
+.listpage{
+    font-size: 35px;
+    position: static;
+    margin-left: 15%;
+}
+
+.sidebar{
+    width: 170px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.backpage{
+    color: #fff;
+    margin-bottom: 10%;
+    margin-left: 2%;
+}
+
+.backpage img{
+    width: 35px;
+    color: #fff;
+}
+
+.subjectlist{
+    margin-left: 15%;
+}
+
+.subjectlist2{
+    margin-left: 15%;
+    margin-top: 5%;
+    padding: 22px 7px;
+}
+
+
+.text-boxpage{
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.text-boxpage a{
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 15px;
+    border: 2px solid #fff;
+    padding: 3px 7px;
+    border-radius: 20px;
+}
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 14px;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr{
+    background-color: #00295cb3;
+    color: #ffffff;
+    text-align: left;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+}
+
+.content-table tbody tr{
+    border-bottom: 1px solid #dddddd;
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr.active-row {
+    font-weight: bold;
+    color: #00295cb3;
+}
+
+.background_result {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(68, 67, 67, 0.479), rgba(58, 58, 58, 0.452)),url(user_page/images/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+    position: static;
+}
+
+.background_result h2{
+    font-size: 35px;
+    padding: 18px 7px;
+}
+
+.sidebar_rusult{
+    width: 170px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.text-boxresult{
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.text-boxresult a{
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 15px;
+    border: 2px solid #fff;
+    padding: 3px 7px;
+    border-radius: 20px;
+}
+
+.backhome img{
+    width: 35px;
+    color: #fff;
+}

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
+{%load static%}
 <html>
 	<title>
 		{% block title %}
-		Login้
+		Login
 		{% endblock %}
 	</title>
 	<head>
 		{% block head %}
 		This is a head
 		{% endblock %}
+		<link rel="stylesheet" href="{% static 'styles.css' %}">
 	</head>
 	<body>
 		{% block body %}

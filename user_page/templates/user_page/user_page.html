@@ -1,13 +1,26 @@
 {% extends 'user_page/layout.html' %}
+{%load static%}
 {% block body %}
-<body bgcolor="pink">
+<body>
+<div class="background_user">
+	<nav>
+		<img src="{% static 'user_page/images/logo.png' %}" class="logo_user">
+		<ul>
+			<li><a href="{% url 'user_page:quota_request_page' %}">ขอโควต้า</a></li>
+			<li><a href="{% url 'user_page:show_quota_result' %}">ดูผลการจดโควต้า</a></li>
+			<li><a href="{% url 'user_page:log_out' %}">ออกจากระบบ</a></li>
+		</ul>
+	</nav>
+	<div class="content_user">
+		<h1 class="slide-left">THAMMASAT UNIVERSITY</h1><br>
+	</div>
+
 	{% csrf_token %}
-	<h1>สวัสดีคุณ{{ name }}</h1>
-	<p>เข้าใช้ครั้งล่าสุด: {{ time }}</p>
-	<ul>
-		<li><a href="{% url 'user_page:quota_request_page' %}">ขอโควต้า</a></li>
-		<li><a href="{% url 'user_page:show_quota_result' %}">ดูผลการจดโควต้า</a></li>
-		<li><a href="{% url 'user_page:log_out' %}">ออกจากระบบ</a></li>
-	</ul>
+	<div class="hello">
+		<h1 class="slide-left">สวัสดี{{ name }}</h1>
+	</div>
+	<p class="time_user">เข้าใช้ครั้งล่าสุด: {{ time }}</p>
+	
+</div>
 </body>
 {% endblock %}

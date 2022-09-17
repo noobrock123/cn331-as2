@@ -1,17 +1,41 @@
 {% extends 'user_page/layout.html' %}
+{%load static%}
 {% block body %}
+<body class="background_result">
     <h2>ผลการจดโควต้า</h2>
-    <li><a href="{% url 'user_page:front_page' %}">ย้อนกลับ</a></li>
-    <ul>
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อวิชา</th>
+                <th>หน่วยกิต</th>
+                <th>ถอนรายวิชา</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for sub in quota_result%}
-            <li>{{ sub.subject_id }}: {{ sub.name }} หน่วยกิต: {{ sub.gpd }}  
-                <a href= "{% url 'user_page:remove_acquired_quota' sub.subject_id %}">ถอน</a>
-            </li>
+            <tr class="active-row">
+                <td>{{ sub.subject_id }}</td>
+
+                <td>{{ sub.name }} </td>
+                
+                <td>{{ sub.gpd }}  </td>
+                
+                <td><a href= "{% url 'user_page:remove_acquired_quota' sub.subject_id %}" >ถอน</a></td>
+            </tr>
             {% empty %}
             <li>คุณยังไม่ได้จดทะเบียนวิชาใดๆ</li>
         {% endfor %}
-    </ul>
+    </tbody>
+    </table>
     {% if quota_result %}
+        <div style="color: #fff;">
         หน่วยกิตรวม: {{ sum_gpd }}
     {% endif %}
+    <div class="sidebar_rusult">
+        <div class="text-boxresult">
+            <a href="{% url 'user_page:front_page' %}" class="backhome"><img src="{% static 'user_page/images/backpage.png' %}">ย้อนกลับ</a>
+        </div>
+    </div>
+</body>
 {% endblock %}
