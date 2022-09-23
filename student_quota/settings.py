@@ -1,3 +1,5 @@
+import django_heroku
+
 """
 Django settings for student_quota project.
 
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-fsjmix0j@3kcv03i(x4y3)g^q!5#-cokr!9*a9gybhw5pvh1ag
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['student-quota.herokuapp.com']
 
 
 # Application definition
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,5 +133,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
 	'http://127.0.0.1:8000/',
-    'http://127.0.0.1:8000/user_page/quota_request/',
 ]
+
+django_heroku.settings(locals())
+
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
