@@ -119,7 +119,7 @@ nav .logo_user{
 .listpage{
     font-size: 35px;
     position: static;
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 .sidebar{
@@ -143,11 +143,11 @@ nav .logo_user{
 }
 
 .subjectlist{
-    margin-left: 10%;
+    margin-left: 20%;
 }
 
 .subjectlist2{
-    margin-left: 10%;
+    margin-left: 20%;
     padding: 22px 7px;
 }
 
@@ -206,7 +206,7 @@ nav .logo_user{
     background-attachment: fixed;
     align-items: center;
     justify-content: center;
-    margin-left: 10%;
+    margin-left: 20%;
     position: static;
 }
 
