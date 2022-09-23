@@ -1,3 +1,3 @@
-web: gunicorn student-quota.wsgi:application --log-file - --log-level debug
+web: gunicorn student_quota.wsgi:application --log-file - --log-level debug
 python manage.py collectstatic --noinput
 manage.py migrate
