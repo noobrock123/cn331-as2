@@ -26,10 +26,6 @@ class Subject(models.Model):
 			return []
 		else:
 			subjects = Subject.objects.filter(subject_id__startswith=sub_id, year=user_regis_year)
-			if len(subjects) == 0:
-				print("No subject found")	
-			else:
-				print(f"{len(subjects)} subjects found.")
 			return subjects
 
 	def __str__(self):
