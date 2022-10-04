@@ -21,17 +21,8 @@ class Subject(models.Model):
 	students = models.ManyToManyField(User, related_name="subjects", blank=True)
 
 	def get_subject(sub_id, user_regis_year):
-<<<<<<< HEAD
-		if type(sub_id) != str:
-			print("Error")	
-			return []
-		else:
-			subjects = Subject.objects.filter(subject_id__startswith=sub_id, year=user_regis_year)
-			return subjects
-=======
 		subjects = Subject.objects.filter(subject_id__startswith=sub_id, year=user_regis_year)
 		return subjects
->>>>>>> dev
 
 	def __str__(self):
 		return f"{self.subject_id}: {self.name}, Semester: {self.semester},GPD: {self.gpd}, Seats= {self.n_seats}, Year= {self.year}"
