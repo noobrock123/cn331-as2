@@ -52,17 +52,21 @@ class user_functions_test(TestCase):
 	
 	def test_acquiring_subjects(self):
 		c = Client()
+		#Login first
 		c.login(username='cool', password='69')
 		c.get(reverse('user_page:quota_request_page'))
 		
+		#User selecting TS1
 		c.get(reverse('user_page:acquire_quota', kwargs={'sub_id':'TS1'}))
 		self.assertEqual(c.session['already_acquired'], True)
 
 		c.get(reverse('user_page:quota_request_page'))
 		
+		#User acquiring subject 
 		c.get(reverse('user_page:acquire_quota', kwargs={'sub_id':'TS4'}))
 		self.assertEqual(c.session['already_acquired'], False)
 
+		#User removing selected subject
 		temp = c.session['selected_subjects']
 		c.get(reverse('user_page:remove_quota', kwargs={'sub_id':'TS4'}))
 		self.assertEqual(c.session['selected_subjects'] == temp, False)
@@ -75,6 +79,14 @@ class user_functions_test(TestCase):
 		c.post(reverse('user_page:accept_quota'))	
 		found_subject = [models.User.objects.get(username='cool').subjects.get(pk='TS4')]
 		self.assertEqual(len(found_subject), 1)
+
+	def test_removing_acquired_subjects(self):
+		c = Client()
+		c.login(username='cool', password='69')
+
+		#User removing subject 'TS2'
+		response = c.post(reverse('user_page:remove_acquired_quota', kwargs={'sub_id':'TS2'}))
+		self.assertEqual(response.status_code, 302)
 
 	def test_is_subject_full(self):
 		self.assertEqual(len(Subject.objects.get(pk="TS2").students.all()), Subject.objects.get(pk="TS2").n_seats)
