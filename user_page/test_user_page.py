@@ -48,10 +48,10 @@ class user_functions_test(TestCase):
 	#==========Check if functions used for request_page are working properly==========
 	def test_is_user_authenticated(self):
 		c = Client()
-		response = c.get(reverse('user_page:front_page'), follow=True)
+		response = c.get(reverse('user_page:front_page'))
 
 		#User input url path
-		self.assertEqual(response.status_code, 200)
+		self.assertEqual(response.status_code, 302)
 
 	def test_is_subject_found(self):
 		import datetime
