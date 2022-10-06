@@ -46,6 +46,13 @@ class user_functions_test(TestCase):
 		self.assertEqual(len(Subject.get_subject("TS5", 2022)), 0)
 	
 	#==========Check if functions used for request_page are working properly==========
+	def test_is_user_authenticated(self):
+		c = Clinet()
+		response = c.get(reverse('user_page:front_page'))
+
+		#User input url path
+		self.assertEqual(response.status_code, 302)
+
 	def test_is_subject_found(self):
 		import datetime
 		self.assertEqual(len(Subject.get_subject("TS4", 2022)), 1)
@@ -86,6 +93,14 @@ class user_functions_test(TestCase):
 
 		#User removing subject 'TS2'
 		response = c.post(reverse('user_page:remove_acquired_quota', kwargs={'sub_id':'TS2'}))
+		self.assertEqual(response.status_code, 302)
+	
+	def test_user_logout(self):
+		c = Client()
+		c.login(username='cool', password='69')
+
+		#User loging out
+		response = c.post(reverse('user_page:log_out'))
 		self.assertEqual(response.status_code, 302)
 
 	def test_is_subject_full(self):
