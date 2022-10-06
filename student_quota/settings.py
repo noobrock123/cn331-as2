@@ -135,7 +135,10 @@ CSRF_TRUSTED_ORIGINS = [
 	'http://127.0.0.1:8000/',
 ]
 
-django_heroku.settings(locals())
+import os
+if os.environ.get('GITHUB_ACTIONS') != 'true': 
+    import django_heroku
+    django_heroku.settings(locals()) 
 
 import dj_database_url 
 prod_db  =  dj_database_url.config(conn_max_age=500)
