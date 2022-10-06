@@ -48,10 +48,14 @@ class user_functions_test(TestCase):
 	#==========Check if functions used for request_page are working properly==========
 	def test_is_user_authenticated(self):
 		c = Client()
+		#If user is not logged in
 		response = c.get(reverse('user_page:front_page'))
-
-		#User input url path
 		self.assertEqual(response.status_code, 302)
+
+		#If user is already logged in
+		c.login(username='cool', password='69')
+		response = c.post(reverse('user_page:front_page'))
+		self.assertEqual(response.status_code, 200)
 
 	def test_is_subject_found(self):
 		import datetime
