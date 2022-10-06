@@ -57,10 +57,6 @@ class user_functions_test(TestCase):
 		response = c.post(reverse('user_page:front_page'))
 		self.assertEqual(response.status_code, 200)
 
-	def test_is_subject_found(self):
-		import datetime
-		self.assertEqual(len(Subject.get_subject("TS4", 2022)), 1)
-	
 	def test_acquiring_subjects(self):
 		c = Client()
 		#Login first
