@@ -92,16 +92,17 @@ class user_functions_test(TestCase):
 		c.login(username='cool', password='69')
 
 		#User removing subject 'TS2'
-		response = c.post(reverse('user_page:remove_acquired_quota', kwargs={'sub_id':'TS2'}))
-		self.assertEqual(response.status_code, 302)
+		response = c.post(reverse('user_page:remove_acquired_quota', kwargs={'sub_id':'TS2'}),
+			follow=True)
+		self.assertEqual(response.status_code, 200)
 	
 	def test_user_logout(self):
 		c = Client()
 		c.login(username='cool', password='69')
 
 		#User loging out
-		response = c.post(reverse('user_page:log_out'))
-		self.assertEqual(response.status_code, 302)
+		response = c.post(reverse('user_page:log_out'), follow=True)
+		self.assertEqual(response.status_code, 200)
 
 	def test_is_subject_full(self):
 		self.assertEqual(len(Subject.objects.get(pk="TS2").students.all()), Subject.objects.get(pk="TS2").n_seats)
