@@ -47,7 +47,7 @@ class user_functions_test(TestCase):
 	
 	#==========Check if functions used for request_page are working properly==========
 	def test_is_user_authenticated(self):
-		c = Clinet()
+		c = Client()
 		response = c.get(reverse('user_page:front_page'))
 
 		#User input url path
